@@ -18,21 +18,21 @@ class App extends Component {
       randomNumber: startingNumber,
       maxNumber: startingNumber,
       listDataFromChild: [],
-      sumOfChosenNumbers: null
+      sumOfChosenNumbers: null,
+      gameOverNumber: 0
     }
 
     this.myCallback = this.myCallback.bind(this);
     this.newRander = this.newRander.bind(this);
   }
 
-  newRander(){
+  newRander(gameOverNumber){
     let newNumber = h.getNewRandomNumber(this.state.maxNumber);
-    console.log('newNumber',newNumber);
-
 
     this.setState({
         randomNumber: newNumber,
-        sumOfChosenNumbers: 0
+        sumOfChosenNumbers: 0,
+        gameOverNumber: gameOverNumber
     });
   }
 
@@ -62,7 +62,7 @@ class App extends Component {
               </div>
           </div>
           <div className="row">
-            <AvailableNumbers maxNumber={ this.state.maxNumber } callbackFromParent={ this.myCallback } />
+            <AvailableNumbers maxNumber={ this.state.maxNumber } callbackFromParent={ this.myCallback } gameOverNumber={ this.state.gameOverNumber}/>
           </div>
       </div>
     );

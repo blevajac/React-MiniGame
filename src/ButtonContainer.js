@@ -3,6 +3,31 @@ import React, { Component } from 'react';
 import h from './helper_functions/helpers';
 
 class ButtonContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: 5
+    };
+
+    this.decrement = this.decrement.bind(this);
+
+  }
+
+  decrement() {
+    this.setState({
+      number: this.state.number - 1
+    })
+  }
+
+  disableDecrement() {
+    if(this.state.number <= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
   render() {
     const { sumOfChosenNumbers } = this.props;
     const { randomNumber } = this.props;
@@ -29,15 +54,16 @@ class ButtonContainer extends Component {
             );
           }
         }} onDoubleClick={() => {
-          /*
-          let newNumber = h.getNewRandomNumber(randomNumber);
-          console.log('newNumber',newNumber);
-          this.props.newNumber(newNumber);
-          */
           this.props.newNumber();
         }} >=</button>
 
-        <button>5</button>
+        <button type="button" className="btn btn-default btn-sm" disabled={this.disableDecrement()}
+            onClick={() => {
+              this.decrement()
+
+              this.props.newNumber(number);
+            }}><span className="glyphicon glyphicon-refresh"></span>{this.state.number}
+        </button>
       </div>
     );
   }

@@ -23,13 +23,14 @@ class AvailableNumbers extends Component {
 */
   render() {
     const { maxNumber } = this.props;
+    const { gameOverNumber } = this.props;
     let arrayOfRandomNumbers = [];
 
     for ( let i = 1; i <= maxNumber; i++) {
       arrayOfRandomNumbers.push(i);
     }
 
-    
+
 
     let numberButton = arrayOfRandomNumbers.map((number) => {
       // return ( <button key={number} onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  >{ number }</button> );
