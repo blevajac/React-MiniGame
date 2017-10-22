@@ -6,7 +6,7 @@ let helpers = {
   },
   getNewRandomNumber: function(number) {
     let randomNumber = Math.floor((Math.random() * number) + 1);
-    console.log('randomNumber', randomNumber);
+
     return randomNumber;
   }
 

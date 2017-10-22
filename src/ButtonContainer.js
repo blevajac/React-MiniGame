@@ -33,36 +33,34 @@ class ButtonContainer extends Component {
     const { randomNumber } = this.props;
 
     return (
-      <div className="">
-        <p>ButtonContainer</p>
-        <p>summ of chosen numbers {sumOfChosenNumbers}</p>
-        <button onClick={() => {
+      <div className="">        
+        <button className="btn btn-primary btn-sm btn-block" onClick={() => {
 
-          if(sumOfChosenNumbers === randomNumber) {
-            console.log('OK');
-            return(
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-ok"></span> Ok
+            if(sumOfChosenNumbers === randomNumber) {
+              console.log('OK');
+              return(
+                  <button type="button" class="btn btn-success btn-sm">
+                      <span class="glyphicon glyphicon-ok"></span> Ok
+                  </button>
+              );
+            }else {
+              console.log('NOPE');
+              return(
+                <button type="button" class="btn btn-danger btn-sm">
+                  <span class="glyphicon glyphicon-remove"></span> Remove
                 </button>
-            );
-          }else {
-            console.log('NOPE');
-            return(
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-remove"></span> Remove
-              </button>
-            );
-          }
+              );
+            }
         }} onDoubleClick={() => {
           this.props.newNumber();
         }} >=</button>
 
-        <button type="button" className="btn btn-default btn-sm" disabled={this.disableDecrement()}
+        <button type="button" className="btn btn-primary btn-sm btn-block" disabled={this.disableDecrement()}
             onClick={() => {
               this.decrement()
 
-              this.props.newNumber(number);
-            }}><span className="glyphicon glyphicon-refresh"></span>{this.state.number}
+              this.props.newNumber(this.state.number);
+            }}><span className="glyphicon glyphicon-refresh"></span><span className="badge badge-pill badge-primary">{this.state.number}</span>
         </button>
       </div>
     );

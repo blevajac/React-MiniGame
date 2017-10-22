@@ -8,6 +8,7 @@ import ShowStarsComponent from './ShowStarsComponent';
 import ButtonContainer from './ButtonContainer';
 import ChosenNumbers from './ChosenNumbers';
 import AvailableNumbers from './AvailableNumbers';
+import GameDescription from './GameDescription';
 
 const startingNumber = h.getRandomNumber();
 
@@ -19,7 +20,7 @@ class App extends Component {
       maxNumber: startingNumber,
       listDataFromChild: [],
       sumOfChosenNumbers: null,
-      gameOverNumber: 0
+      gameOverNumber: 4
     }
 
     this.myCallback = this.myCallback.bind(this);
@@ -28,7 +29,7 @@ class App extends Component {
 
   newRander(gameOverNumber){
     let newNumber = h.getNewRandomNumber(this.state.maxNumber);
-
+    console.log('gameOverNumber', gameOverNumber);
     this.setState({
         randomNumber: newNumber,
         sumOfChosenNumbers: 0,
@@ -50,19 +51,24 @@ class App extends Component {
 
     return (
       <div className="container-fluid">
+          <h1>Draw Nine</h1>
+          <hr></hr>
           <div className="row">
-              <div className="col-12 col-md-5">
+              <div className="col-12 col-md-5 border border-primary rounded">
                 <ShowStarsComponent randomNumber={ this.state.randomNumber } />
               </div>
-              <div className="col-12 col-md-2">
+              <div className="col-12 col-md-2 border border-light rounded">
                 <ButtonContainer sumOfChosenNumbers={this.state.sumOfChosenNumbers} randomNumber={ this.state.randomNumber } newNumber={ this.newRander } />
               </div>
-              <div className="col-12 col-md-5">
+              <div className="col-12 col-md-5 border border-primary rounded">
                 <ChosenNumbers listDataFromChild={ this.state.listDataFromChild } />
               </div>
           </div>
-          <div className="row">
+          <div className="row border border-primary rounded">
             <AvailableNumbers maxNumber={ this.state.maxNumber } callbackFromParent={ this.myCallback } gameOverNumber={ this.state.gameOverNumber}/>
+          </div>
+          <div className="row">
+            {/*  <GameDescription /> */} 
           </div>
       </div>
     );

@@ -12,6 +12,7 @@ class AvailableNumbers extends Component {
   }
 
   myCallback(dataFromChild) {
+    
     this.props.callbackFromParent(dataFromChild);
   }
   /*
@@ -25,22 +26,33 @@ class AvailableNumbers extends Component {
     const { maxNumber } = this.props;
     const { gameOverNumber } = this.props;
     let arrayOfRandomNumbers = [];
+    let numberButton = null;
+    let test = null;
 
     for ( let i = 1; i <= maxNumber; i++) {
       arrayOfRandomNumbers.push(i);
     }
 
+    if(gameOverNumber===1) {
+      return test = (
+        <div>
+          <p>Game Over</p>
+          <button>Play Again!!!</button>
+        </div>
+      );
+    }else{
+      return numberButton = arrayOfRandomNumbers.map((number) => {
+        // return ( <button key={number} onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  >{ number }</button> );
+        return ( <NumberButton key={number} callbackFromParent={ this.myCallback } number={number}/> );
+      });
+    }
 
 
-    let numberButton = arrayOfRandomNumbers.map((number) => {
-      // return ( <button key={number} onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  >{ number }</button> );
-      return ( <NumberButton key={number} callbackFromParent={ this.myCallback } number={number}/> );
-    });
 
     return (
       <div className="">
-        <p>AvailableNumbers</p>
         { numberButton }
+        {test}
       </div>
     );
   }
