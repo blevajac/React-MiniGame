@@ -10,6 +10,10 @@ import ChosenNumbers from './ChosenNumbers';
 import AvailableNumbers from './AvailableNumbers';
 import GameDescription from './GameDescription';
 
+//css
+import './css/available_numbers.css';
+import './css/app.css';
+
 const startingNumber = h.getRandomNumber();
 
 class App extends Component {
@@ -50,7 +54,7 @@ class App extends Component {
   render() {
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid app">
           <h1>Draw Nine</h1>
           <hr></hr>
           <div className="row">
@@ -64,11 +68,11 @@ class App extends Component {
                 <ChosenNumbers listDataFromChild={ this.state.listDataFromChild } />
               </div>
           </div>
-          <div className="row border border-primary rounded">
+          <div className="row available_numbers">
             <AvailableNumbers maxNumber={ this.state.maxNumber } callbackFromParent={ this.myCallback } gameOverNumber={ this.state.gameOverNumber}/>
           </div>
           <div className="row">
-            {/*  <GameDescription /> */} 
+            {/*  <GameDescription /> */}
           </div>
       </div>
     );

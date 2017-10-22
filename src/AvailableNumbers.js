@@ -12,7 +12,7 @@ class AvailableNumbers extends Component {
   }
 
   myCallback(dataFromChild) {
-    
+
     this.props.callbackFromParent(dataFromChild);
   }
   /*
@@ -50,9 +50,9 @@ class AvailableNumbers extends Component {
 
 
     return (
-      <div className="">
+      <div className="available_numbers">
         { numberButton }
-        {test}
+        { test }
       </div>
     );
   }
