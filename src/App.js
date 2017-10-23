@@ -24,16 +24,18 @@ class App extends Component {
       maxNumber: startingNumber,
       listDataFromChild: [],
       sumOfChosenNumbers: null,
-      gameOverNumber: 4
+      gameOverNumber: 4,
+      chosenNumbersReturned: []
     }
 
     this.myCallback = this.myCallback.bind(this);
     this.newRander = this.newRander.bind(this);
+    this.testMeChosenNumber = this.testMeChosenNumber.bind(this);
   }
 
   newRander(gameOverNumber){
     let newNumber = h.getNewRandomNumber(this.state.maxNumber);
-    console.log('gameOverNumber', gameOverNumber);
+
     this.setState({
         randomNumber: newNumber,
         sumOfChosenNumbers: 0,
@@ -42,13 +44,29 @@ class App extends Component {
   }
 
   myCallback(dataFromChild) {
+    console.log('returned to app', dataFromChild);
     let sum = this.state.sumOfChosenNumbers + dataFromChild;
 
     this.setState( prevState => ({
         listDataFromChild: [...prevState.listDataFromChild, dataFromChild],
-        sumOfChosenNumbers: sum
-    }))
+        sumOfChosenNumbers: sum,
+        chosenNumbersReturned: []
+    }));
     //ES 6 ==>  this.setState({ listDataFromChild: [...this.state.listDataFromChild, dataFromChild] });
+
+  }
+
+  testMeChosenNumber(dataFromChild) {
+    let listDataFromChild = this.state.listDataFromChild;
+    let index = listDataFromChild.indexOf(dataFromChild);
+
+    listDataFromChild.splice(index, 1);
+
+    this.setState( prevState => ({
+        chosenNumbersReturned: [...prevState.chosenNumbersReturned, dataFromChild],
+        listDataFromChild: listDataFromChild,
+    }));
+
   }
 
   render() {
@@ -65,11 +83,11 @@ class App extends Component {
                 <ButtonContainer sumOfChosenNumbers={this.state.sumOfChosenNumbers} randomNumber={ this.state.randomNumber } newNumber={ this.newRander } />
               </div>
               <div className="col-12 col-md-5 border border-primary rounded">
-                <ChosenNumbers listDataFromChild={ this.state.listDataFromChild } />
+                <ChosenNumbers listDataFromChild={ this.state.listDataFromChild } callbackFromParent={ this.testMeChosenNumber }/>
               </div>
           </div>
           <div className="row available_numbers">
-            <AvailableNumbers maxNumber={ this.state.maxNumber } callbackFromParent={ this.myCallback } gameOverNumber={ this.state.gameOverNumber}/>
+            <AvailableNumbers maxNumber={ this.state.maxNumber } chosenNumbersReturned={ this.state.chosenNumbersReturned } callbackFromParent={ this.myCallback } gameOverNumber={ this.state.gameOverNumber}/>
           </div>
           <div className="row">
             {/*  <GameDescription /> */}

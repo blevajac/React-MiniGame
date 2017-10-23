@@ -12,7 +12,6 @@ class AvailableNumbers extends Component {
   }
 
   myCallback(dataFromChild) {
-
     this.props.callbackFromParent(dataFromChild);
   }
   /*
@@ -25,12 +24,16 @@ class AvailableNumbers extends Component {
   render() {
     const { maxNumber } = this.props;
     const { gameOverNumber } = this.props;
-    let arrayOfRandomNumbers = [];
+    const { chosenNumbersReturned } = this.props;
+console.log(chosenNumbersReturned);
+    let makeArrayForRandomdPlayerNumber = [];
     let numberButton = null;
     let test = null;
+    //let numberReturned = chosenNumbersReturned.splice(0,1);
+    let numberReturned = chosenNumbersReturned[0];
 
     for ( let i = 1; i <= maxNumber; i++) {
-      arrayOfRandomNumbers.push(i);
+      makeArrayForRandomdPlayerNumber.push(i);
     }
 
     if(gameOverNumber===1) {
@@ -41,9 +44,9 @@ class AvailableNumbers extends Component {
         </div>
       );
     }else{
-      return numberButton = arrayOfRandomNumbers.map((number) => {
-        // return ( <button key={number} onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  >{ number }</button> );
-        return ( <NumberButton key={number} callbackFromParent={ this.myCallback } number={number}/> );
+      return numberButton = makeArrayForRandomdPlayerNumber.map((number) => {
+          // return ( <button key={number} onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  >{ number }</button> );
+          return ( <NumberButton key={number} numberReturned={numberReturned} callbackFromParent={ this.myCallback } number={number}/> );
       });
     }
 

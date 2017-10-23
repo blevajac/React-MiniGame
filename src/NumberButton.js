@@ -11,6 +11,7 @@ class NumberButton extends Component{
     }
 
   }
+
   sendClickedNumber(numver) {
     let test = numver;
 
@@ -20,8 +21,24 @@ class NumberButton extends Component{
     });
   }
 
+  componentWillReceiveProps(nextProps){
+    //console.log(nextProps);
+    if(nextProps.numberReturned === nextProps.number) {
+      this.loadData();
+    }
+
+  }
+
+  loadData() {
+    this.setState({
+      isButtonDisabled: false
+    });
+  }
+
   render() {
     const { number } = this.props;
+    const { numberReturned } = this.props;
+
     return(
         <button onClick={(e) => this.sendClickedNumber(number, e)} disabled={this.state.isButtonDisabled}  className={ this.state.isButtonDisabled ? "round-button disable" : "round-button " } >{ number }</button>
     );

@@ -33,7 +33,8 @@ class ButtonContainer extends Component {
     const { randomNumber } = this.props;
 
     return (
-      <div className="">        
+      <div className="">
+        <p>ButtonContainer</p>     
         <button className="btn btn-primary btn-sm btn-block" onClick={() => {
 
             if(sumOfChosenNumbers === randomNumber) {
